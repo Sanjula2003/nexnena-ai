@@ -1,3 +1,5 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import FeatureCards from "./components/FeatureCards";
@@ -11,9 +13,19 @@ import Testimonials from "./pages/Testimonials";
 import CTA from "./components/CTA";
 import Footer from "./components/Footer";
 
-function App() {
+import DashboardLayout from "./layouts/DashboardLayout";
+import DashboardHome from "./dashboard/DashboardHome";
+import StudentsPage from "./dashboard/StudentsPage";
+import AnalyticsPage from "./dashboard/AnalyticsPage";
+import AIToolsPage from "./dashboard/AIToolsPage";
+import SocialStudioPage from "./dashboard/SocialStudioPage";
+import SettingsPage from "./dashboard/SettingsPage";
+import LoginPage from "./auth/LoginPage";
+import NotFound from "./pages/NotFound";
+
+function LandingPage() {
   return (
-    <main className="app">
+    <>
       <Navbar />
       <Hero />
       <FeatureCards />
@@ -26,7 +38,31 @@ function App() {
       <Testimonials />
       <CTA />
       <Footer />
-    </main>
+    </>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <main className="app">
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<LoginPage />} />
+
+          <Route element={<DashboardLayout />}>
+            <Route path="/dashboard" element={<DashboardHome />} />
+            <Route path="/students" element={<StudentsPage />} />
+            <Route path="/analytics" element={<AnalyticsPage />} />
+            <Route path="/ai-tools" element={<AIToolsPage />} />
+            <Route path="/social-studio" element={<SocialStudioPage />} />
+            <Route path="/settings" element={<SettingsPage />} />
+          </Route>
+
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </main>
+    </BrowserRouter>
   );
 }
 

@@ -1,4 +1,13 @@
-import { ArrowRight, Shield, BarChart3, Brain, Smartphone } from "lucide-react";
+import {
+  ArrowRight,
+  Shield,
+  BarChart3,
+  Brain,
+  Smartphone,
+} from "lucide-react";
+
+import { motion } from "framer-motion";
+import { fadeUp, staggerContainer } from "../utils/motion";
 
 function Hero() {
   return (
@@ -6,44 +15,58 @@ function Hero() {
       <div className="heroGlow heroGlowOne"></div>
       <div className="heroGlow heroGlowTwo"></div>
 
-      <div className="heroContent">
-        <div className="badge">
+      <motion.div
+        className="heroContent"
+        variants={staggerContainer}
+        initial="hidden"
+        animate="visible"
+      >
+        <motion.div variants={fadeUp} className="badge">
           <Brain size={16} />
           AI-Powered Education OS
-        </div>
+        </motion.div>
 
-        <h1>
+        <motion.h1 variants={fadeUp}>
           The Intelligent Operating System for{" "}
           <span>Modern Educators</span>
-        </h1>
+        </motion.h1>
 
-        <p className="heroText">
+        <motion.p variants={fadeUp} className="heroText">
           NexNena AI empowers Sri Lankan teachers and institutes with AI tools,
           analytics, automation, and smart learning systems to build the future
           of education.
-        </p>
+        </motion.p>
 
-        <div className="heroButtons">
-          <button className="primaryBtn">
+        <motion.div variants={fadeUp} className="heroButtons">
+          <a href="/login" className="primaryBtn">
             Book a Demo <ArrowRight size={18} />
-          </button>
-          <button className="secondaryBtn">Explore Features</button>
-        </div>
+          </a>
 
-        <div className="heroPills">
+          <button className="secondaryBtn">
+            Explore Features
+          </button>
+        </motion.div>
+
+        <motion.div variants={fadeUp} className="heroPills">
           <div><Brain size={16} /> AI-Powered</div>
           <div><BarChart3 size={16} /> Data-Driven</div>
           <div><Shield size={16} /> Secure</div>
           <div><Smartphone size={16} /> Mobile First</div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
-      <div className="dashboardCard">
+      <motion.div
+        className="dashboardCard"
+        initial={{ opacity: 0, y: 40, scale: 0.96 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.9 }}
+      >
         <div className="dashboardTop">
           <div>
             <h3>NexNena Teacher OS</h3>
             <p>Good evening, Sanjula 👋</p>
           </div>
+
           <span>May 2026</span>
         </div>
 
@@ -91,7 +114,7 @@ function Hero() {
             5 payments are pending
           </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }
