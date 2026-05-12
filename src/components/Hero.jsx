@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import {
   ArrowRight,
   Shield,
@@ -38,9 +40,9 @@ function Hero() {
         </motion.p>
 
         <motion.div variants={fadeUp} className="heroButtons">
-          <a href="/login" className="primaryBtn">
-            Book a Demo <ArrowRight size={18} />
-          </a>
+          <Link to="/login" className="primaryBtn">
+              Book a Demo <ArrowRight size={18} />
+          </Link>
 
           <a href="#features" className="secondaryBtn">
               Explore Features
