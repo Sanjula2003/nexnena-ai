@@ -8,6 +8,7 @@ import {
   Settings,
   Sparkles,
   Users,
+  FileText,
 } from "lucide-react";
 
 import DashboardTopbar from "../components/DashboardTopbar";
@@ -18,6 +19,7 @@ const navItems = [
   { label: "Students", path: "/students", icon: <Users size={18} /> },
   { label: "Analytics", path: "/analytics", icon: <BarChart3 size={18} /> },
   { label: "AI Tools", path: "/ai-tools", icon: <Brain size={18} /> },
+  { label: "Exam Builder", path: "/exam-builder", icon: <FileText size={18} /> },
   { label: "Social Studio", path: "/social-studio", icon: <MessageSquare size={18} /> },
   { label: "Settings", path: "/settings", icon: <Settings size={18} /> },
 ];

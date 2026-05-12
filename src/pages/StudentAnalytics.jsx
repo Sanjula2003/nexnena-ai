@@ -1,195 +1,224 @@
-import {
-  AreaChart,
-  Area,
-  XAxis,
-  Tooltip,
-  ResponsiveContainer,
-  PieChart,
-  Pie,
-  Cell,
-} from "recharts";
+import { useEffect, useState } from "react";
 
 import {
   AlertTriangle,
   Brain,
   TrendingUp,
   Users,
+  ShieldAlert,
 } from "lucide-react";
 
-const performanceData = [
-  { month: "Jan", score: 52 },
-  { month: "Feb", score: 58 },
-  { month: "Mar", score: 66 },
-  { month: "Apr", score: 71 },
-  { month: "May", score: 79 },
-  { month: "Jun", score: 86 },
-];
+import {
+  collection,
+  onSnapshot,
+} from "firebase/firestore";
 
-const engagementData = [
-  { name: "Highly Active", value: 42 },
-  { name: "Moderate", value: 35 },
-  { name: "Low", value: 23 },
-];
-
-const COLORS = ["#3B82F6", "#06B6D4", "#7C3AED"];
+import { db } from "../firebase";
 
 function StudentAnalytics() {
+  const [students, setStudents] = useState([]);
+
+  useEffect(() => {
+    const unsubscribe = onSnapshot(
+      collection(db, "students"),
+      (snapshot) => {
+        const studentData = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+
+        setStudents(studentData);
+      }
+    );
+
+    return () => unsubscribe();
+  }, []);
+
+  const totalStudents = students.length;
+
+  const lowAttendanceStudents = students.filter(
+    (student) => Number(student.attendance) < 65
+  );
+
+  const highRiskStudents = students.filter(
+    (student) =>
+      Number(student.attendance) < 50 ||
+      Number(student.performance) < 45
+  );
+
+  const averageAttendance =
+    students.length > 0
+      ? (
+          students.reduce(
+            (sum, student) =>
+              sum + Number(student.attendance || 0),
+            0
+          ) / students.length
+        ).toFixed(1)
+      : 0;
+
+  const averagePerformance =
+    students.length > 0
+      ? (
+          students.reduce(
+            (sum, student) =>
+              sum + Number(student.performance || 0),
+            0
+          ) / students.length
+        ).toFixed(1)
+      : 0;
+
   return (
-    <section className="analyticsSection">
-      <div className="sectionHeader">
-        <span>STUDENT INTELLIGENCE</span>
+    <section className="dashPage">
+      <div className="dashHeader">
+        <div>
+          <span>AI ANALYTICS</span>
 
-        <h2>AI-Powered Learning Analytics.</h2>
+          <h1>NexNena Student Intelligence</h1>
 
-        <p>
-          NexNena AI transforms educational data into actionable intelligence
-          through predictive insights, engagement tracking, and performance
-          analytics.
-        </p>
+          <p>
+            AI-powered educational analytics and student risk intelligence.
+          </p>
+        </div>
+
+        <button>Analytics AI Active</button>
       </div>
 
-      <div className="analyticsGrid">
-        <div className="analyticsCard largeAnalytics">
-          <div className="analyticsTop">
-            <div>
-              <h3>Performance Growth</h3>
-              <p>AI-tracked learning progression</p>
-            </div>
+      <div className="analyticsKPIGrid">
+        <div className="analyticsCard">
+          <Users size={28} />
 
-            <div className="analyticsBadge">
-              <TrendingUp size={16} />
-              +18.2%
-            </div>
-          </div>
+          <h3>{totalStudents}</h3>
 
-          <div className="chartWrapper">
-            <ResponsiveContainer width="100%" height={320}>
-              <AreaChart data={performanceData}>
-                <defs>
-                  <linearGradient id="colorScore" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#3B82F6" stopOpacity={0.8} />
-                    <stop offset="95%" stopColor="#3B82F6" stopOpacity={0} />
-                  </linearGradient>
-                </defs>
-
-                <XAxis
-                  dataKey="month"
-                  stroke="#94A3B8"
-                  tickLine={false}
-                  axisLine={false}
-                />
-
-                <Tooltip />
-
-                <Area
-                  type="monotone"
-                  dataKey="score"
-                  stroke="#3B82F6"
-                  strokeWidth={4}
-                  fillOpacity={1}
-                  fill="url(#colorScore)"
-                />
-              </AreaChart>
-            </ResponsiveContainer>
-          </div>
+          <p>Total Students</p>
         </div>
 
         <div className="analyticsCard">
-          <div className="analyticsTop">
+          <TrendingUp size={28} />
+
+          <h3>{averageAttendance}%</h3>
+
+          <p>Average Attendance</p>
+        </div>
+
+        <div className="analyticsCard">
+          <Brain size={28} />
+
+          <h3>{averagePerformance}%</h3>
+
+          <p>Average Performance</p>
+        </div>
+
+        <div className="analyticsCard riskCard">
+          <ShieldAlert size={28} />
+
+          <h3>{highRiskStudents.length}</h3>
+
+          <p>High Risk Students</p>
+        </div>
+      </div>
+
+      <div className="insightGrid">
+        <div className="insightPanel">
+          <div className="workspaceTop">
             <div>
-              <h3>Engagement Score</h3>
-              <p>Student activity distribution</p>
+              <h3>AI Educational Insights</h3>
+
+              <p>Automatically generated learning intelligence.</p>
+            </div>
+
+            <div className="workspaceBadge">
+              <Brain size={16} />
+              Live AI
             </div>
           </div>
 
-          <div className="pieWrapper">
-            <ResponsiveContainer width="100%" height={260}>
-              <PieChart>
-                <Pie
-                  data={engagementData}
-                  innerRadius={70}
-                  outerRadius={100}
-                  paddingAngle={5}
-                  dataKey="value"
+          <div className="insightList">
+            <div className="insightItem">
+              <AlertTriangle size={18} />
+
+              <div>
+                <h4>
+                  {lowAttendanceStudents.length} students are below
+                  65% attendance
+                </h4>
+
+                <p>
+                  Attendance risk detected across multiple classes.
+                </p>
+              </div>
+            </div>
+
+            <div className="insightItem">
+              <TrendingUp size={18} />
+
+              <div>
+                <h4>
+                  Student engagement increased this month
+                </h4>
+
+                <p>
+                  Average performance trend shows positive growth.
+                </p>
+              </div>
+            </div>
+
+            <div className="insightItem">
+              <ShieldAlert size={18} />
+
+              <div>
+                <h4>
+                  {highRiskStudents.length} students need urgent
+                  academic support
+                </h4>
+
+                <p>
+                  AI detected performance and attendance risk.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="insightPanel">
+          <div className="workspaceTop">
+            <div>
+              <h3>High Risk Students</h3>
+
+              <p>AI-flagged educational risk profiles.</p>
+            </div>
+
+            <div className="workspaceBadge">
+              <ShieldAlert size={16} />
+              Risk Engine
+            </div>
+          </div>
+
+          <div className="riskStudentList">
+            {highRiskStudents.length === 0 ? (
+              <p className="emptyText">
+                No high-risk students detected.
+              </p>
+            ) : (
+              highRiskStudents.map((student) => (
+                <div
+                  key={student.id}
+                  className="riskStudentCard"
                 >
-                  {engagementData.map((entry, index) => (
-                    <Cell
-                      key={`cell-${index}`}
-                      fill={COLORS[index % COLORS.length]}
-                    />
-                  ))}
-                </Pie>
-              </PieChart>
-            </ResponsiveContainer>
-          </div>
+                  <h4>{student.name}</h4>
 
-          <div className="engagementLegend">
-            <div><span className="blueDot"></span> Highly Active</div>
-            <div><span className="cyanDot"></span> Moderate</div>
-            <div><span className="purpleDot"></span> Low Activity</div>
-          </div>
-        </div>
+                  <div className="riskMetrics">
+                    <span>
+                      Attendance: {student.attendance}%
+                    </span>
 
-        <div className="analyticsCard">
-          <h3>AI Intelligence Insights</h3>
-
-          <div className="insightBox">
-            <AlertTriangle size={18} />
-
-            <div>
-              <h4>Revision Risk Detected</h4>
-              <p>
-                12 students are showing low revision consistency this week.
-              </p>
-            </div>
-          </div>
-
-          <div className="insightBox">
-            <Brain size={18} />
-
-            <div>
-              <h4>AI Recommendation</h4>
-              <p>
-                Schedule an additional Biology revision session before exams.
-              </p>
-            </div>
-          </div>
-
-          <div className="insightBox">
-            <Users size={18} />
-
-            <div>
-              <h4>Attendance Intelligence</h4>
-              <p>
-                Combined Maths attendance dropped by 8% compared to last month.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="analyticsCard">
-          <h3>Weak Chapter Detection</h3>
-
-          <div className="weaknessList">
-            <div>
-              <span>Organic Chemistry</span>
-              <strong>78%</strong>
-            </div>
-
-            <div>
-              <span>Vectors</span>
-              <strong>65%</strong>
-            </div>
-
-            <div>
-              <span>Mechanics</span>
-              <strong>58%</strong>
-            </div>
-
-            <div>
-              <span>Electric Fields</span>
-              <strong>82%</strong>
-            </div>
+                    <span>
+                      Performance: {student.performance}%
+                    </span>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
         </div>
       </div>

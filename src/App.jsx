@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import ProtectedRoute from "./components/ProtectedRoute";
+import ExamBuilder from "./pages/ExamBuilder";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import FeatureCards from "./components/FeatureCards";
@@ -50,11 +51,18 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<LoginPage />} />
 
-          <Route element={<DashboardLayout />}>
+          <Route
+            element={
+              <ProtectedRoute>
+                <DashboardLayout />
+              </ProtectedRoute>
+            }
+          >
             <Route path="/dashboard" element={<DashboardHome />} />
             <Route path="/students" element={<StudentsPage />} />
             <Route path="/analytics" element={<AnalyticsPage />} />
             <Route path="/ai-tools" element={<AIToolsPage />} />
+            <Route path="/exam-builder" element={<ExamBuilder />} />
             <Route path="/social-studio" element={<SocialStudioPage />} />
             <Route path="/settings" element={<SettingsPage />} />
           </Route>

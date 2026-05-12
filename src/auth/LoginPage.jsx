@@ -1,7 +1,42 @@
-import { Brain, Lock, Mail, Sparkles } from "lucide-react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Brain, Lock, Mail, Sparkles, UserPlus } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+
+import { auth } from "../firebase";
 
 function LoginPage() {
+  const navigate = useNavigate();
+
+  const [mode, setMode] = useState("login");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  async function handleSubmit() {
+    setError("");
+    setLoading(true);
+
+    try {
+      if (mode === "signup") {
+        await createUserWithEmailAndPassword(auth, email, password);
+      } else {
+        await signInWithEmailAndPassword(auth, email, password);
+      }
+
+      navigate("/dashboard");
+    } catch (err) {
+      setError("Login failed. Check your email/password or create a new account.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <section className="loginPage">
       <div className="loginGlowOne"></div>
@@ -20,9 +55,13 @@ function LoginPage() {
         </div>
 
         <div className="loginContent">
-          <span>WELCOME BACK</span>
+          <span>{mode === "login" ? "WELCOME BACK" : "CREATE ACCOUNT"}</span>
 
-          <h1>Access Your AI Workspace</h1>
+          <h1>
+            {mode === "login"
+              ? "Access Your AI Workspace"
+              : "Start Your Teacher OS"}
+          </h1>
 
           <p>
             Manage students, analytics, AI tools, and educational operations
@@ -32,26 +71,56 @@ function LoginPage() {
           <div className="loginInputs">
             <div className="loginInput">
               <Mail size={18} />
-              <input placeholder="Teacher Email" />
+              <input
+                type="email"
+                placeholder="Teacher Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </div>
 
             <div className="loginInput">
               <Lock size={18} />
-              <input type="password" placeholder="Password" />
+              <input
+                type="password"
+                placeholder="Password - minimum 6 characters"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
             </div>
           </div>
 
-          <Link to="/dashboard" className="loginPageBtn">
-            <Brain size={18} />
-            Continue to Teacher OS
-          </Link>
+          {error && <p className="authError">{error}</p>}
+
+          <button className="loginPageBtn" onClick={handleSubmit} disabled={loading}>
+            {mode === "login" ? <Brain size={18} /> : <UserPlus size={18} />}
+            {loading
+              ? "Processing..."
+              : mode === "login"
+              ? "Login to Teacher OS"
+              : "Create Teacher Account"}
+          </button>
 
           <div className="demoAccess">
-            <p>Quick Demo Access</p>
+            <p>
+              {mode === "login"
+                ? "New to NexNena AI?"
+                : "Already have an account?"}
+            </p>
 
-            <Link to="/dashboard">
-              Explore Demo Workspace
-            </Link>
+            <button
+              className="authSwitchBtn"
+              onClick={() => {
+                setMode(mode === "login" ? "signup" : "login");
+                setError("");
+              }}
+            >
+              {mode === "login"
+                ? "Create a new teacher account"
+                : "Login to existing account"}
+            </button>
+
+            <Link to="/dashboard">Explore Demo Workspace</Link>
           </div>
         </div>
       </div>
