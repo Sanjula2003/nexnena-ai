@@ -4255,3 +4255,263 @@ button {
     grid-template-columns: 1fr;
   }
 }
+
+/* AI POSTER STUDIO */
+
+.posterStudioGrid {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 24px;
+}
+
+.posterControlsPanel,
+.posterPreviewPanel {
+  background: rgba(15, 23, 42, 0.82);
+  border: 1px solid rgba(148, 163, 184, 0.08);
+  border-radius: 30px;
+  padding: 28px;
+}
+
+.posterForm {
+  display: grid;
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.posterForm input {
+  width: 100%;
+  background: rgba(2, 6, 23, 0.72);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  border-radius: 16px;
+  padding: 14px;
+  color: white;
+  font-family: inherit;
+  outline: none;
+}
+
+.posterForm input::placeholder {
+  color: #64748b;
+}
+
+.captionBox {
+  margin-top: 26px;
+  padding: 22px;
+  border-radius: 24px;
+  background: rgba(2, 6, 23, 0.55);
+  border: 1px solid rgba(148, 163, 184, 0.08);
+}
+
+.captionTop {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.captionTop svg {
+  color: #38bdf8;
+}
+
+.captionTop h3 {
+  font-size: 18px;
+}
+
+.captionBox textarea {
+  width: 100%;
+  min-height: 210px;
+  resize: vertical;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #cbd5e1;
+  font-family: inherit;
+  line-height: 1.7;
+}
+
+.posterPreviewPanel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.posterCanvas {
+  width: 620px;
+  min-height: 760px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 36px;
+  padding: 42px;
+  background:
+    radial-gradient(circle at top left, rgba(124, 58, 237, 0.7), transparent 36%),
+    radial-gradient(circle at bottom right, rgba(6, 182, 212, 0.62), transparent 38%),
+    linear-gradient(135deg, #080d1c, #111827);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 40px 120px rgba(6, 182, 212, 0.16);
+}
+
+.posterGlowOne,
+.posterGlowTwo {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(80px);
+}
+
+.posterGlowOne {
+  width: 260px;
+  height: 260px;
+  background: rgba(124, 58, 237, 0.5);
+  top: -70px;
+  right: -80px;
+}
+
+.posterGlowTwo {
+  width: 280px;
+  height: 280px;
+  background: rgba(6, 182, 212, 0.38);
+  bottom: -90px;
+  left: -80px;
+}
+
+.posterBrandRow,
+.posterMainContent,
+.posterInfoGrid,
+.posterFooterCTA {
+  position: relative;
+  z-index: 2;
+}
+
+.posterBrandRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.posterMiniLogo {
+  width: 54px;
+  height: 54px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #7c3aed, #06b6d4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.posterBrandRow h4 {
+  font-size: 24px;
+}
+
+.posterBrandRow p {
+  color: #cbd5e1;
+  margin-top: 4px;
+}
+
+.posterMainContent {
+  margin-top: 80px;
+}
+
+.posterBadge {
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.13);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #cffafe;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.posterMainContent h2 {
+  margin-top: 28px;
+  color: #cbd5e1;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.posterMainContent h1 {
+  margin-top: 14px;
+  font-size: 62px;
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+  color: white;
+}
+
+.posterMainContent p {
+  max-width: 500px;
+  color: #dbeafe;
+  line-height: 1.8;
+  font-size: 18px;
+  margin-top: 24px;
+}
+
+.posterInfoGrid {
+  margin-top: 60px;
+  display: grid;
+  gap: 16px;
+}
+
+.posterInfoGrid div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(2, 6, 23, 0.45);
+  color: white;
+}
+
+.posterInfoGrid svg {
+  color: #67e8f9;
+}
+
+.posterFooterCTA {
+  margin-top: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.posterFooterCTA strong {
+  background: white;
+  color: #080d1c;
+  padding: 16px 22px;
+  border-radius: 16px;
+  font-size: 18px;
+}
+
+.posterFooterCTA span {
+  color: #cbd5e1;
+  font-size: 14px;
+}
+
+.socialStudioBottom {
+  margin-top: 24px;
+}
+
+@media (max-width: 1200px) {
+  .posterStudioGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .posterCanvas {
+    width: 100%;
+    max-width: 620px;
+  }
+}
+
+@media (max-width: 650px) {
+  .posterCanvas {
+    min-height: 680px;
+    padding: 28px;
+  }
+
+  .posterMainContent h1 {
+    font-size: 44px;
+  }
+
+  .posterFooterCTA {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
