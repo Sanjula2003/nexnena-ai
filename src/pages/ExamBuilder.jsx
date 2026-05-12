@@ -43,15 +43,22 @@ Question Format Example:
 
 1. What is photosynthesis?
 
+
 (A) Option one
+
 (B) Option two
+
 (C) Option three
+
 (D) Option four
+
 
 Correct Answer: B
 
+
 Explanation:
 Short explanation here.
+
 
 Rules:
 - Never place answers inside question sentence
