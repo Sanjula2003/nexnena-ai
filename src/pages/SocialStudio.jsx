@@ -42,7 +42,7 @@ const tools = [
 
 function SocialStudio() {
   return (
-    <section className="socialSection">
+    <section id="solutions" className="socialSection">
       <div className="sectionHeader">
         <span>SOCIAL STUDIO AI</span>
 

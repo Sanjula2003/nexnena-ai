@@ -1,6 +1,6 @@
 function Testimonials() {
   return (
-    <section className="testimonialSection">
+    <section id="about">
       <div className="sectionHeader">
         <span>EARLY VISION</span>
         <h2>Designed for the future of Sri Lankan education.</h2>

@@ -24,7 +24,7 @@ const menu = [
 
 function TeacherOS() {
   return (
-    <section className="teacherOSSection">
+    <section id="product" className="teacherSection">
       <div className="sectionHeader">
         <span>NEXNENA TEACHER OS</span>
         <h2>Your AI Command Center for Education.</h2>

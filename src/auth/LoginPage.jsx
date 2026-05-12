@@ -41,7 +41,7 @@ function LoginPage() {
             </div>
           </div>
 
-          <Link to="/dashboard" className="loginBtn">
+          <Link to="/dashboard" className="loginPageBtn">
             <Brain size={18} />
             Continue to Teacher OS
           </Link>

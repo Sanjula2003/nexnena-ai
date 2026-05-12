@@ -42,7 +42,7 @@ const features = [
 
 function FeatureCards() {
   return (
-    <section className="featuresSection">
+    <section id="features" className="featuresSection">
       <div className="sectionHeader">
         <span>POWERFUL AI FEATURES</span>
 

@@ -24,7 +24,7 @@ const plans = [
 
 function Pricing() {
   return (
-    <section className="pricingSection">
+    <section id="pricing" className="pricingSection">
       <div className="sectionHeader">
         <span>STARTUP PACKAGES</span>
         <h2>Simple packages for modern educators.</h2>

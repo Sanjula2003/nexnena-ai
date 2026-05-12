@@ -42,9 +42,9 @@ function Hero() {
             Book a Demo <ArrowRight size={18} />
           </a>
 
-          <button className="secondaryBtn">
-            Explore Features
-          </button>
+          <a href="#features" className="secondaryBtn">
+              Explore Features
+          </a>
         </motion.div>
 
         <motion.div variants={fadeUp} className="heroPills">

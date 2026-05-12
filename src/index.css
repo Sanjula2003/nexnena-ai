@@ -79,7 +79,7 @@ body {
 }
 
 .loginBtn,
-.demoBtn,
+
 .primaryBtn,
 .secondaryBtn {
   border: none;
@@ -2879,7 +2879,7 @@ button {
   font-size: 15px;
 }
 
-.loginBtn {
+.loginPageBtn {
   margin-top: 28px;
 
   width: 100%;
@@ -2901,6 +2901,11 @@ button {
   font-weight: 700;
 
   transition: 0.3s ease;
+}
+
+.loginPageBtn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.05);
 }
 
 .loginBtn:hover {
@@ -3536,4 +3541,90 @@ button {
   .settingsGrid {
     grid-template-columns: 1fr;
   }
+}
+
+
+/* NAVBAR BUTTON FIX */
+
+.navActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.navActions button,
+.navActions a,
+.loginBtn,
+.demoBtn {
+  white-space: nowrap;
+}
+
+.demoBtn {
+  min-width: 140px;
+  height: 52px;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginBtn {
+  min-width: 90px;
+  height: 52px;
+  padding: 0 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.demoBtn,
+.loginBtn {
+  border: none !important;
+  outline: none !important;
+}
+
+.demoBtn:focus,
+.loginBtn:focus {
+  outline: none !important;
+}
+
+
+.brand {
+  text-decoration: none;
+  color: white;
+}
+
+.loginNavBtn {
+  min-width: 90px;
+  height: 52px;
+  padding: 0 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 16px;
+
+  background: rgba(255, 255, 255, 0.04);
+
+  border: 1px solid rgba(148, 163, 184, 0.2);
+
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+.loginNavBtn:hover {
+  border-color: rgba(6, 182, 212, 0.45);
+}
+
+.demoBtn {
+  text-decoration: none;
+}
+
+.primaryBtn,
+.secondaryBtn {
+  text-decoration: none;
 }
