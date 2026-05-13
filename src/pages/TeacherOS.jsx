@@ -11,6 +11,8 @@ import {
   Users,
 } from "lucide-react";
 
+import ScrollToTopButton from "../components/ScrollToTopButton";
+
 const menu = [
   { icon: <LayoutDashboard size={18} />, label: "Dashboard" },
   { icon: <Users size={18} />, label: "Students" },
@@ -147,6 +149,7 @@ function TeacherOS() {
           </div>
         </div>
       </div>
+      <ScrollToTopButton />
     </section>
   );
 }

@@ -1,14 +1,17 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { useState } from "react";
+
 import {
   BarChart3,
   Brain,
+  FileText,
   Home,
+  Menu,
   MessageSquare,
   Settings,
   Sparkles,
   Users,
-  FileText,
+  X,
 } from "lucide-react";
 
 import DashboardTopbar from "../components/DashboardTopbar";
@@ -26,14 +29,34 @@ const navItems = [
 
 function DashboardLayout() {
   const [paletteOpen, setPaletteOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  function closeSidebar() {
+    setSidebarOpen(false);
+  }
 
   return (
     <div className="dashShell">
-      <aside className="dashSidebar">
+      <button
+        className="mobileDashMenu"
+        onClick={() => setSidebarOpen(!sidebarOpen)}
+      >
+        {sidebarOpen ? <X size={22} /> : <Menu size={22} />}
+      </button>
+
+      {sidebarOpen && (
+        <div
+          className="dashboardOverlay"
+          onClick={closeSidebar}
+        ></div>
+      )}
+
+      <aside className={`dashSidebar ${sidebarOpen ? "mobileOpen" : ""}`}>
         <div className="dashBrand">
           <div className="dashLogo">
             <Sparkles size={22} />
           </div>
+
           <div>
             <h2>NexNena</h2>
             <p>Teacher OS</p>
@@ -42,21 +65,35 @@ function DashboardLayout() {
 
         <nav className="dashNav">
           {navItems.map((item) => (
-            <NavLink key={item.path} to={item.path} className={({ isActive }) => isActive ? "dashActive" : ""}>
+            <NavLink
+              key={item.path}
+              to={item.path}
+              onClick={closeSidebar}
+              className={({ isActive }) => (isActive ? "dashActive" : "")}
+            >
               {item.icon}
               {item.label}
             </NavLink>
           ))}
         </nav>
 
-        <button className="commandBtn" onClick={() => setPaletteOpen(true)}>
+        <button
+          className="commandBtn"
+          onClick={() => {
+            setPaletteOpen(true);
+            closeSidebar();
+          }}
+        >
           Ctrl + K · Command
         </button>
 
         <div className="dashAiBox">
           <Brain size={22} />
           <h4>AI Assistant</h4>
-          <p>Ask about students, analytics, revision risks, or content generation.</p>
+          <p>
+            Ask about students, analytics, revision risks, or content
+            generation.
+          </p>
         </div>
       </aside>
 

@@ -1,17 +1,13 @@
 import { useState } from "react";
-import { Brain, Lock, Mail, Sparkles, UserPlus } from "lucide-react";
+import { Brain, Lock, Mail, Sparkles } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 import { auth } from "../firebase";
 
 function LoginPage() {
   const navigate = useNavigate();
 
-  const [mode, setMode] = useState("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -20,18 +16,21 @@ function LoginPage() {
 
   async function handleSubmit() {
     setError("");
+
+    if (!email || !password) {
+      setError("Please enter your teacher email and password.");
+      return;
+    }
+
     setLoading(true);
 
     try {
-      if (mode === "signup") {
-        await createUserWithEmailAndPassword(auth, email, password);
-      } else {
-        await signInWithEmailAndPassword(auth, email, password);
-      }
-
+      await signInWithEmailAndPassword(auth, email, password);
       navigate("/dashboard");
     } catch (err) {
-      setError("Login failed. Check your email/password or create a new account.");
+      setError(
+        "Login failed. Please check your approved teacher email and password."
+      );
     } finally {
       setLoading(false);
     }
@@ -50,22 +49,18 @@ function LoginPage() {
 
           <div>
             <h2>NexNena AI</h2>
-            <p>Teacher OS Platform</p>
+            <p>Invite-Only Teacher OS Platform</p>
           </div>
         </div>
 
         <div className="loginContent">
-          <span>{mode === "login" ? "WELCOME BACK" : "CREATE ACCOUNT"}</span>
+          <span>APPROVED TEACHER ACCESS</span>
 
-          <h1>
-            {mode === "login"
-              ? "Access Your AI Workspace"
-              : "Start Your Teacher OS"}
-          </h1>
+          <h1>Access Your AI Workspace</h1>
 
           <p>
-            Manage students, analytics, AI tools, and educational operations
-            from one intelligent platform.
+            NexNena AI is currently available for approved teachers and selected
+            early users only.
           </p>
 
           <div className="loginInputs">
@@ -73,7 +68,7 @@ function LoginPage() {
               <Mail size={18} />
               <input
                 type="email"
-                placeholder="Teacher Email"
+                placeholder="Approved teacher email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -83,7 +78,7 @@ function LoginPage() {
               <Lock size={18} />
               <input
                 type="password"
-                placeholder="Password - minimum 6 characters"
+                placeholder="Teacher password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -92,35 +87,23 @@ function LoginPage() {
 
           {error && <p className="authError">{error}</p>}
 
-          <button className="loginPageBtn" onClick={handleSubmit} disabled={loading}>
-            {mode === "login" ? <Brain size={18} /> : <UserPlus size={18} />}
-            {loading
-              ? "Processing..."
-              : mode === "login"
-              ? "Login to Teacher OS"
-              : "Create Teacher Account"}
+          <button
+            className="loginPageBtn"
+            onClick={handleSubmit}
+            disabled={loading}
+          >
+            <Brain size={18} />
+            {loading ? "Verifying..." : "Login to Teacher OS"}
           </button>
 
           <div className="demoAccess">
-            <p>
-              {mode === "login"
-                ? "New to NexNena AI?"
-                : "Already have an account?"}
-            </p>
+            <p>Need teacher access?</p>
 
-            <button
-              className="authSwitchBtn"
-              onClick={() => {
-                setMode(mode === "login" ? "signup" : "login");
-                setError("");
-              }}
-            >
-              {mode === "login"
-                ? "Create a new teacher account"
-                : "Login to existing account"}
-            </button>
+            <a href="mailto:nexnenaai@gmail.com">
+              Request an invite from NexNena AI
+            </a>
 
-            <Link to="/dashboard">Explore Demo Workspace</Link>
+            <Link to="/">Back to homepage</Link>
           </div>
         </div>
       </div>
