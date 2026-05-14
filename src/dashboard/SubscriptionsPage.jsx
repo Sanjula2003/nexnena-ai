@@ -167,7 +167,7 @@ function SubscriptionsPage() {
         const temporaryPassword =
           "Student@" + Math.floor(1000 + Math.random() * 9000);
 
-        const response = await fetch("http://localhost:5000/create-student", {
+        const response = await fetch("https://nexnena-ai-1.onrender.com//create-student", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
