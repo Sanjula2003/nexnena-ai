@@ -168,7 +168,7 @@ function SubscriptionsPage() {
           "Student@" + Math.floor(1000 + Math.random() * 9000);
 
         const response = await fetch(
-            "//https://nexnena-ai-1.onrender.com/create-student",
+          "https://nexnena-ai-1.onrender.com/create-student",
             {
                 method: "POST",
                 headers: {
