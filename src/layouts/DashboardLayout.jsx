@@ -1,39 +1,55 @@
 import { NavLink, Outlet } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
-  BarChart3,
-  Brain,
-  FileText,
+  BookOpen,
+  CreditCard,
+  GraduationCap,
   Home,
   Menu,
-  MessageSquare,
   Settings,
-  Sparkles,
-  Users,
   X,
 } from "lucide-react";
 
+import { auth, db } from "../firebase";
+import { doc, getDoc } from "firebase/firestore";
+
 import DashboardTopbar from "../components/DashboardTopbar";
-import CommandPalette from "../components/CommandPalette";
 
 const navItems = [
   { label: "Dashboard", path: "/dashboard", icon: <Home size={18} /> },
-  { label: "Students", path: "/students", icon: <Users size={18} /> },
-  { label: "Analytics", path: "/analytics", icon: <BarChart3 size={18} /> },
-  { label: "AI Tools", path: "/ai-tools", icon: <Brain size={18} /> },
-  { label: "Exam Builder", path: "/exam-builder", icon: <FileText size={18} /> },
-  { label: "Social Studio", path: "/social-studio", icon: <MessageSquare size={18} /> },
+  { label: "Topics", path: "/topics", icon: <BookOpen size={18} /> },
+  { label: "Students & Payments", path: "/subscriptions", icon: <CreditCard size={18} /> },
   { label: "Settings", path: "/settings", icon: <Settings size={18} /> },
 ];
 
 function DashboardLayout() {
-  const [paletteOpen, setPaletteOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [teacherPlan, setTeacherPlan] = useState("basic");
 
   function closeSidebar() {
     setSidebarOpen(false);
   }
+
+  useEffect(() => {
+    async function fetchTeacherPlan() {
+      try {
+        const currentUser = auth.currentUser;
+        if (!currentUser) return;
+
+        const userRef = doc(db, "users", currentUser.uid);
+        const userSnap = await getDoc(userRef);
+
+        if (userSnap.exists()) {
+          setTeacherPlan(userSnap.data().plan || "basic");
+        }
+      } catch (error) {
+        console.error("Failed to fetch teacher plan:", error);
+      }
+    }
+
+    fetchTeacherPlan();
+  }, []);
 
   return (
     <div className="dashShell">
@@ -45,22 +61,24 @@ function DashboardLayout() {
       </button>
 
       {sidebarOpen && (
-        <div
-          className="dashboardOverlay"
-          onClick={closeSidebar}
-        ></div>
+        <div className="dashboardOverlay" onClick={closeSidebar}></div>
       )}
 
       <aside className={`dashSidebar ${sidebarOpen ? "mobileOpen" : ""}`}>
         <div className="dashBrand">
           <div className="dashLogo">
-            <Sparkles size={22} />
+            <GraduationCap size={22} />
           </div>
 
           <div>
             <h2>NexNena</h2>
-            <p>Teacher OS</p>
+            <p>Learning Portal</p>
           </div>
+        </div>
+
+        <div className="currentPlanBadge">
+          Current Plan:
+          <span>{teacherPlan.toUpperCase()}</span>
         </div>
 
         <nav className="dashNav">
@@ -76,33 +94,12 @@ function DashboardLayout() {
             </NavLink>
           ))}
         </nav>
-
-        <button
-          className="commandBtn"
-          onClick={() => {
-            setPaletteOpen(true);
-            closeSidebar();
-          }}
-        >
-          Ctrl + K · Command
-        </button>
-
-        <div className="dashAiBox">
-          <Brain size={22} />
-          <h4>AI Assistant</h4>
-          <p>
-            Ask about students, analytics, revision risks, or content
-            generation.
-          </p>
-        </div>
       </aside>
 
       <main className="dashMain">
         <DashboardTopbar />
         <Outlet />
       </main>
-
-      {paletteOpen && <CommandPalette close={() => setPaletteOpen(false)} />}
     </div>
   );
 }

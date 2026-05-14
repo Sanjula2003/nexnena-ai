@@ -4962,3 +4962,1947 @@ button {
 .scrollTopBtn:hover {
   transform: translateY(-4px) !important;
 }
+
+/* CSV IMPORT PAGE */
+
+.csvImportGrid {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 24px;
+}
+
+.csvImportPanel,
+.csvPreviewPanel {
+  background: rgba(15, 23, 42, 0.82);
+  border: 1px solid rgba(148, 163, 184, 0.1);
+  border-radius: 30px;
+  padding: 28px;
+}
+
+.csvUploadBox {
+  margin-top: 24px;
+  min-height: 240px;
+  border: 1px dashed rgba(6, 182, 212, 0.45);
+  background: rgba(2, 6, 23, 0.55);
+  border-radius: 26px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+
+  text-align: center;
+  cursor: pointer;
+}
+
+.csvUploadBox svg {
+  color: #38bdf8;
+}
+
+.csvUploadBox p {
+  color: #94a3b8;
+}
+
+.csvUploadBox input {
+  display: none;
+}
+
+.csvMessage {
+  margin-top: 20px;
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(6, 182, 212, 0.1);
+  border: 1px solid rgba(6, 182, 212, 0.18);
+  color: #67e8f9;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.csvImportBtn {
+  margin-top: 20px;
+  width: 100%;
+  justify-content: center;
+}
+
+.csvTableWrapper {
+  overflow-x: auto;
+  margin-top: 18px;
+}
+
+.csvTable {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 780px;
+}
+
+.csvTable th,
+.csvTable td {
+  padding: 16px;
+  text-align: left;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.08);
+}
+
+.csvTable th {
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+.csvTable td {
+  color: white;
+}
+
+.csvNote {
+  margin-top: 16px;
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+@media (max-width: 950px) {
+  .csvImportGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* TOPICS PAGE */
+
+.topicGrid {
+  margin-top: 24px;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 22px;
+}
+
+.topicCard {
+  overflow: hidden;
+
+  border-radius: 28px;
+
+  background: rgba(17, 24, 39, 0.82);
+
+  border: 1px solid rgba(148, 163, 184, 0.12);
+
+  transition: 0.3s ease;
+}
+
+.topicCard:hover {
+  transform: translateY(-6px);
+
+  border-color: rgba(6, 182, 212, 0.32);
+
+  box-shadow: 0 28px 70px rgba(6, 182, 212, 0.08);
+}
+
+.topicBanner {
+  height: 190px;
+
+  background-size: cover !important;
+  background-position: center !important;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(15, 23, 42, 0.82);
+}
+
+.topicBanner svg {
+  color: #38bdf8;
+}
+
+.topicContent {
+  padding: 24px;
+}
+
+.topicContent h3 {
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+
+.topicContent p {
+  color: #94a3b8;
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+.topicBottom {
+  margin-top: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.topicStatus {
+  padding: 8px 14px;
+
+  border-radius: 999px;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.topicStatus.active {
+  background: rgba(16, 185, 129, 0.14);
+  color: #34d399;
+}
+
+.topicStatus.inactive {
+  background: rgba(239, 68, 68, 0.14);
+  color: #f87171;
+}
+
+.topicActionBtn {
+  border: none;
+
+  padding: 12px 16px;
+
+  border-radius: 14px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  cursor: pointer;
+
+  background: rgba(15, 23, 42, 0.82);
+
+  border: 1px solid rgba(148, 163, 184, 0.12);
+
+  color: white;
+
+  font-family: inherit;
+}
+
+.topicActionBtn:hover {
+  border-color: rgba(6, 182, 212, 0.35);
+}
+
+.topicForm {
+  margin-top: 24px;
+
+  display: grid;
+  gap: 18px;
+}
+
+.topicForm input,
+.topicForm textarea {
+  width: 100%;
+
+  border: 1px solid rgba(148, 163, 184, 0.14);
+
+  background: rgba(15, 23, 42, 0.82);
+
+  color: white;
+
+  padding: 16px;
+
+  border-radius: 18px;
+
+  font-family: inherit;
+
+  outline: none;
+}
+
+.topicForm textarea {
+  resize: vertical;
+  min-height: 130px;
+}
+
+.topicForm input::placeholder,
+.topicForm textarea::placeholder {
+  color: #64748b;
+}
+
+.topicCreateBtn {
+  border: none;
+
+  border-radius: 18px;
+
+  padding: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  background: linear-gradient(135deg, #7c3aed, #06b6d4);
+
+  color: white;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  font-family: inherit;
+}
+
+.emptyTopicState {
+  padding: 50px;
+
+  border-radius: 24px;
+
+  text-align: center;
+
+  background: rgba(15, 23, 42, 0.72);
+
+  border: 1px dashed rgba(148, 163, 184, 0.18);
+
+  color: #94a3b8;
+}
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+  .topicGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .topicBottom {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .topicActionBtn {
+    justify-content: center;
+  }
+}
+
+.topicInput,
+.topicTextarea {
+  width: 100%;
+
+  background: rgba(15, 23, 42, 0.82);
+
+  border: 1px solid rgba(148, 163, 184, 0.14);
+
+  border-radius: 18px;
+
+  padding: 16px;
+
+  color: white;
+
+  font-family: inherit;
+
+  outline: none;
+}
+
+.topicTextarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+.topicInput::placeholder,
+.topicTextarea::placeholder {
+  color: #64748b;
+}
+
+.lessonPanel {
+  margin-top: 28px;
+}
+
+.topicLessonBtn {
+  width: 100%;
+
+  margin-top: 18px;
+
+  border: none;
+
+  border-radius: 16px;
+
+  padding: 14px;
+
+  background: linear-gradient(135deg, #7c3aed, #06b6d4);
+
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  cursor: pointer;
+
+  font-weight: 700;
+}
+
+.lessonGrid {
+  margin-top: 28px;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 24px;
+}
+
+.lessonCard {
+  overflow: hidden;
+
+  border-radius: 28px;
+
+  background: rgba(17, 24, 39, 0.82);
+
+  border: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.lessonContent {
+  padding: 22px;
+}
+
+.lessonContent h3 {
+  font-size: 22px;
+}
+
+.lessonContent p {
+  margin-top: 12px;
+
+  color: #94a3b8;
+
+  line-height: 1.7;
+}
+
+.lessonMaterialBtn {
+  margin-top: 20px;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  text-decoration: none;
+
+  color: white;
+
+  background: rgba(15, 23, 42, 0.82);
+
+  border: 1px solid rgba(148, 163, 184, 0.12);
+
+  padding: 12px 16px;
+
+  border-radius: 14px;
+}
+
+.lessonMaterialBtn:hover {
+  border-color: rgba(6, 182, 212, 0.32);
+}
+
+@media (max-width: 700px) {
+  .lessonGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.lessonActions {
+  margin-top: 20px;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.lessonActionBtn {
+  border: none;
+
+  padding: 10px 14px;
+
+  border-radius: 12px;
+
+  background: rgba(15, 23, 42, 0.82);
+
+  border: 1px solid rgba(148, 163, 184, 0.12);
+
+  color: white;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  cursor: pointer;
+}
+
+.lessonActionBtn:hover {
+  border-color: rgba(6, 182, 212, 0.32);
+}
+
+.lessonActionBtn.delete:hover {
+  border-color: rgba(239, 68, 68, 0.35);
+}
+
+.lessonCancelBtn {
+  border: none;
+  border-radius: 18px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: rgba(239, 68, 68, 0.12);
+  color: #f87171;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.lessonTitleRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.invalidVideoBox {
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(239, 68, 68, 0.1);
+  color: #f87171;
+  font-weight: 700;
+}
+
+.studentStatsGrid {
+  margin-bottom: 28px;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 22px;
+}
+
+.studentStatCard {
+  padding: 24px;
+
+  border-radius: 24px;
+
+  background: rgba(17, 24, 39, 0.82);
+
+  border: 1px solid rgba(148, 163, 184, 0.12);
+
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.studentStatCard h3 {
+  font-size: 30px;
+}
+
+.studentStatCard p {
+  color: #94a3b8;
+}
+
+.lockedTopic {
+  opacity: 0.78;
+}
+
+.lockedOverlay {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(2, 6, 23, 0.72);
+
+  backdrop-filter: blur(4px);
+}
+
+.lockedBtn {
+  width: 100%;
+
+  margin-top: 18px;
+
+  border: none;
+
+  border-radius: 16px;
+
+  padding: 14px;
+
+  background: rgba(239, 68, 68, 0.12);
+
+  color: #f87171;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  font-weight: 700;
+}
+
+.studentAccessForm {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.studentAccessForm input,
+.studentAccessForm select {
+  width: 100%;
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  background: rgba(15, 23, 42, 0.82);
+  color: white;
+  padding: 16px;
+  border-radius: 18px;
+  font-family: inherit;
+  outline: none;
+}
+
+.studentAccessForm button {
+  border: none;
+  border-radius: 18px;
+  padding: 16px;
+  background: linear-gradient(135deg, #7c3aed, #06b6d4);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.cancelAccessBtn {
+  background: rgba(239, 68, 68, 0.12) !important;
+  color: #f87171 !important;
+}
+
+.studentAccessPanel {
+  margin-top: 28px;
+}
+
+.studentAccessTableWrapper {
+  overflow-x: auto;
+}
+
+.studentAccessActions {
+  display: flex;
+  gap: 10px;
+}
+
+.studentAccessActions button {
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.82);
+  color: white;
+  cursor: pointer;
+}
+
+.deleteAccessBtn {
+  background: rgba(239, 68, 68, 0.12) !important;
+  color: #f87171 !important;
+}
+
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+@media (max-width: 800px) {
+  .studentAccessForm {
+    grid-template-columns: 1fr;
+  }
+}
+
+.uploadBox {
+  width: 100%;
+  min-height: 120px;
+  border: 1px dashed rgba(6, 182, 212, 0.45);
+  background: rgba(2, 6, 23, 0.55);
+  border-radius: 22px;
+  color: #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  cursor: pointer;
+  font-weight: 700;
+  text-align: center;
+}
+
+.uploadBox svg {
+  color: #38bdf8;
+}
+
+.uploadBox input {
+  display: none;
+}
+
+.uploadPreview {
+  width: 100%;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, 0.14);
+}
+
+.uploadPreview img {
+  width: 100%;
+  max-height: 260px;
+  object-fit: cover;
+  display: block;
+}
+
+.uploadedFileLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #67e8f9;
+  background: rgba(6, 182, 212, 0.1);
+  border: 1px solid rgba(6, 182, 212, 0.22);
+  padding: 14px 16px;
+  border-radius: 16px;
+  font-weight: 700;
+}
+
+.uploadedFileLink:hover {
+  border-color: rgba(6, 182, 212, 0.45);
+}
+
+.progressWrapper {
+  width: 100%;
+  height: 16px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative;
+  margin-top: 12px;
+}
+
+.progressBar {
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    #06b6d4,
+    #3b82f6
+  );
+  border-radius: 999px;
+}
+
+.progressWrapper span {
+  position: absolute;
+  right: 12px;
+  top: -28px;
+  color: #cbd5e1;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.completedLesson {
+  border: 1px solid rgba(34,197,94,0.35);
+}
+
+.completedBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(34,197,94,0.12);
+  color: #4ade80;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.lessonTopRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.lessonButtonRow {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
+.completeLessonBtn {
+  border: none;
+  background: linear-gradient(
+    135deg,
+    #22c55e,
+    #16a34a
+  );
+  color: white;
+  padding: 12px 18px;
+  border-radius: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.completeLessonBtn:hover {
+  opacity: 0.9;
+}
+
+.currentPlanBadge {
+  margin: 18px 0 22px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  color: #cbd5e1;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.currentPlanBadge span {
+  margin-left: 8px;
+  color: #38bdf8;
+}
+
+.protectedVideoWrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #000;
+}
+
+.protectedVideoWrapper iframe {
+  width: 100%;
+  height: 220px;
+  border: none;
+  pointer-events: auto;
+}
+
+.videoProtectionOverlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 170px;
+  height: 65px;
+  z-index: 10;
+  background: transparent;
+}
+
+
+.customVideoOverlay {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      rgba(2, 6, 23, 0.35),
+      rgba(2, 6, 23, 0.55)
+    );
+
+  z-index: 9;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  transition: 0.3s ease;
+}
+
+.customVideoOverlay:hover {
+  background:
+    linear-gradient(
+      rgba(2, 6, 23, 0.2),
+      rgba(2, 6, 23, 0.45)
+    );
+}
+
+.customPlayButton {
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  filter: drop-shadow(
+    0 0 24px rgba(6, 182, 212, 0.55)
+  );
+}
+
+.videoOverlayText {
+  margin-top: 14px;
+
+  color: white;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  letter-spacing: 0.05em;
+}
+
+.videoProtectionOverlay {
+  position: absolute;
+
+  top: 0;
+  right: 0;
+
+  width: 180px;
+  height: 60px;
+
+  z-index: 10;
+
+  background: transparent;
+}
+
+.protectedVideoWrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #000;
+}
+
+.protectedVideoWrapper iframe {
+  width: 100%;
+  height: 220px;
+  border: none;
+  pointer-events: none;
+}
+
+.fullVideoBlocker {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background: transparent;
+}
+
+.customPlayerControls {
+  position: absolute;
+  left: 18px;
+  bottom: 18px;
+  z-index: 20;
+}
+
+.customPlayerControls button {
+  border: none;
+  border-radius: 999px;
+  padding: 12px 18px;
+
+  background: linear-gradient(
+    135deg,
+    #7c3aed,
+    #06b6d4
+  );
+
+  color: white;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  box-shadow: 0 20px 40px rgba(6,182,212,0.25);
+}
+
+.customPlayerControls button:hover {
+  transform: translateY(-2px);
+}
+
+/* NEXNENA PROTECTED CUSTOM VIDEO PLAYER */
+
+.protectedVideoWrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #000;
+  min-height: 220px;
+}
+
+.protectedVideoWrapper iframe {
+  width: 100%;
+  height: 220px;
+  border: none;
+  pointer-events: none;
+}
+
+.fullVideoBlocker {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background: transparent;
+}
+
+.customPlayerControls {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  z-index: 20;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 10px;
+}
+
+.customPlayerControls button {
+  border: none;
+  border-radius: 999px;
+
+  padding: 10px 14px;
+
+  background: linear-gradient(135deg, #7c3aed, #06b6d4);
+  color: white;
+
+  font-weight: 800;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  box-shadow: 0 20px 40px rgba(6, 182, 212, 0.25);
+}
+
+.customPlayerControls button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+}
+
+.protectedVideoWrapper:fullscreen {
+  width: 100vw;
+  height: 100vh;
+  border-radius: 0;
+  background: #000;
+}
+
+.protectedVideoWrapper:fullscreen iframe {
+  width: 100vw;
+  height: 100vh;
+}
+
+.protectedVideoWrapper:fullscreen .customPlayerControls {
+  bottom: 28px;
+}
+
+@media (max-width: 700px) {
+  .customPlayerControls {
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    gap: 7px;
+  }
+
+  .customPlayerControls button {
+    padding: 9px 11px;
+    font-size: 12px;
+  }
+}
+
+
+/* NEXNENA PROTECTED CUSTOM VIDEO PLAYER WITH TIMELINE */
+
+.protectedVideoWrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #000;
+  min-height: 220px;
+}
+
+.protectedVideoWrapper iframe {
+  width: 100%;
+  height: 220px;
+  border: none;
+  pointer-events: none;
+}
+
+.fullVideoBlocker {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background: transparent;
+}
+
+.customPlayerControls {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  z-index: 20;
+
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+
+  transition: 0.25s ease;
+}
+
+.protectedVideoWrapper:hover .customPlayerControls {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.videoTimelineRow {
+  display: grid;
+  grid-template-columns: 42px 1fr 42px;
+  align-items: center;
+  gap: 10px;
+
+  margin-bottom: 10px;
+
+  padding: 10px 12px;
+  border-radius: 999px;
+
+  background: rgba(2, 6, 23, 0.72);
+  backdrop-filter: blur(10px);
+}
+
+.videoTimelineRow span {
+  color: white;
+  font-size: 12px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.videoTimelineRow input {
+  width: 100%;
+  accent-color: #06b6d4;
+  cursor: pointer;
+}
+
+.videoButtonRow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 10px;
+}
+
+.videoButtonRow button {
+  border: none;
+  border-radius: 999px;
+
+  padding: 10px 14px;
+
+  background: linear-gradient(135deg, #7c3aed, #06b6d4);
+  color: white;
+
+  font-weight: 800;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  box-shadow: 0 20px 40px rgba(6, 182, 212, 0.25);
+}
+
+.videoButtonRow button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+}
+
+.protectedVideoWrapper:fullscreen {
+  width: 100vw;
+  height: 100vh;
+  border-radius: 0;
+  background: #000;
+}
+
+.protectedVideoWrapper:fullscreen iframe {
+  width: 100vw;
+  height: 100vh;
+}
+
+.protectedVideoWrapper:fullscreen .customPlayerControls {
+  bottom: 28px;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+@media (max-width: 700px) {
+  .customPlayerControls {
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .videoTimelineRow {
+    grid-template-columns: 38px 1fr 38px;
+    padding: 8px 10px;
+  }
+
+  .videoTimelineRow span {
+    font-size: 11px;
+  }
+
+  .videoButtonRow {
+    gap: 7px;
+  }
+
+  .videoButtonRow button {
+    padding: 9px 11px;
+    font-size: 12px;
+  }
+}
+
+
+@media (max-width: 700px) {
+  .customPlayerControls {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    pointer-events: auto !important;
+
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+  }
+
+  .videoTimelineRow {
+    grid-template-columns: 38px 1fr 38px;
+    padding: 8px 10px;
+  }
+
+  .videoButtonRow {
+    gap: 7px;
+  }
+
+  .videoButtonRow button {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+}
+
+/* =========================================================
+   NEXNENA STUDENT PORTAL REPAIR CSS
+   Paste this at the VERY BOTTOM of index.css.
+   It overrides duplicated/accidentally broken video + lesson styles.
+========================================================= */
+
+/* Lesson card layout repair */
+.lessonGrid {
+  margin-top: 28px !important;
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)) !important;
+  gap: 24px !important;
+}
+
+.lessonCard {
+  overflow: hidden !important;
+  border-radius: 28px !important;
+  background: rgba(17, 24, 39, 0.82) !important;
+  border: 1px solid rgba(148, 163, 184, 0.12) !important;
+}
+
+.lessonContent {
+  padding: 22px !important;
+}
+
+.lessonTopRow {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+
+.lessonTopRow h3,
+.lessonContent h3 {
+  font-size: 22px !important;
+  margin: 0 !important;
+  color: #ffffff !important;
+}
+
+.lessonContent p {
+  margin-top: 12px !important;
+  color: #94a3b8 !important;
+  line-height: 1.7 !important;
+}
+
+/* Mark Complete + Materials button repair */
+.lessonButtonRow {
+  display: flex !important;
+  gap: 12px !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  margin-top: 18px !important;
+}
+
+.completeLessonBtn {
+  border: none !important;
+  background: linear-gradient(135deg, #22c55e, #16a34a) !important;
+  color: #ffffff !important;
+  padding: 12px 18px !important;
+  border-radius: 14px !important;
+  font-weight: 800 !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  width: auto !important;
+  min-width: 150px !important;
+  height: 58px !important;
+  font-family: inherit !important;
+  box-shadow: none !important;
+}
+
+.completeLessonBtn:hover {
+  opacity: 0.92 !important;
+  transform: translateY(-2px) !important;
+}
+
+.lessonMaterialBtn {
+  margin-top: 0 !important;
+  min-width: 170px !important;
+  height: 58px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  text-decoration: none !important;
+  color: #ffffff !important;
+  background: rgba(15, 23, 42, 0.82) !important;
+  border: 1px solid rgba(148, 163, 184, 0.12) !important;
+  padding: 12px 18px !important;
+  border-radius: 14px !important;
+  font-weight: 800 !important;
+}
+
+.lessonMaterialBtn:hover {
+  border-color: rgba(6, 182, 212, 0.32) !important;
+  transform: translateY(-2px) !important;
+}
+
+.completedLesson {
+  border: 1px solid rgba(34, 197, 94, 0.35) !important;
+}
+
+.completedBadge {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  background: rgba(34, 197, 94, 0.12) !important;
+  color: #4ade80 !important;
+  padding: 8px 14px !important;
+  border-radius: 999px !important;
+  font-size: 13px !important;
+  font-weight: 800 !important;
+}
+
+/* Video wrapper repair */
+.protectedVideoWrapper {
+  position: relative !important;
+  overflow: hidden !important;
+  border-radius: 18px !important;
+  background: #000000 !important;
+  min-height: 220px !important;
+}
+
+.protectedVideoWrapper iframe {
+  width: 100% !important;
+  height: 220px !important;
+  border: none !important;
+  pointer-events: none !important;
+}
+
+.fullVideoBlocker {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 5 !important;
+  background: transparent !important;
+}
+
+/* Hide controls by default. Show only on hover/focus. */
+.customPlayerControls {
+  position: absolute !important;
+  left: 12px !important;
+  right: 12px !important;
+  bottom: 12px !important;
+  z-index: 20 !important;
+
+  opacity: 0 !important;
+  transform: translateY(12px) !important;
+  pointer-events: none !important;
+
+  transition: opacity 0.25s ease, transform 0.25s ease !important;
+}
+
+/* PC hover + mobile tap/focus support */
+.protectedVideoWrapper:hover .customPlayerControls,
+.protectedVideoWrapper:focus-within .customPlayerControls,
+.customPlayerControls:hover {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  pointer-events: auto !important;
+}
+
+/* Timeline */
+.videoTimelineRow {
+  display: grid !important;
+  grid-template-columns: 42px 1fr 42px !important;
+  align-items: center !important;
+  gap: 10px !important;
+
+  margin-bottom: 10px !important;
+  padding: 10px 12px !important;
+  border-radius: 999px !important;
+
+  background: rgba(2, 6, 23, 0.78) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+.videoTimelineRow span {
+  color: #ffffff !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+  text-align: center !important;
+}
+
+.videoTimelineRow input {
+  width: 100% !important;
+  cursor: pointer !important;
+  accent-color: #06b6d4 !important;
+}
+
+/* Video buttons */
+.videoButtonRow {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 10px !important;
+}
+
+.videoButtonRow button {
+  border: none !important;
+  border-radius: 999px !important;
+  padding: 10px 14px !important;
+
+  background: linear-gradient(135deg, #7c3aed, #06b6d4) !important;
+  color: white !important;
+
+  font-weight: 800 !important;
+  cursor: pointer !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+
+  box-shadow: 0 20px 40px rgba(6, 182, 212, 0.25) !important;
+  font-family: inherit !important;
+}
+
+.videoButtonRow button:hover {
+  transform: translateY(-2px) !important;
+  filter: brightness(1.08) !important;
+}
+
+/* Fullscreen styling */
+.protectedVideoWrapper:fullscreen {
+  width: 100vw !important;
+  height: 100vh !important;
+  border-radius: 0 !important;
+  background: #000 !important;
+}
+
+.protectedVideoWrapper:fullscreen iframe {
+  width: 100vw !important;
+  height: 100vh !important;
+}
+
+.protectedVideoWrapper:fullscreen .customPlayerControls {
+  bottom: 28px !important;
+}
+
+.protectedVideoWrapper:fullscreen:hover .customPlayerControls,
+.protectedVideoWrapper:fullscreen:focus-within .customPlayerControls {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  pointer-events: auto !important;
+}
+
+/* Mobile / small window repair */
+@media (max-width: 700px) {
+  .lessonGrid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .lessonButtonRow {
+    align-items: stretch !important;
+  }
+
+  .completeLessonBtn,
+  .lessonMaterialBtn {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .customPlayerControls {
+    left: 8px !important;
+    right: 8px !important;
+    bottom: 8px !important;
+
+    opacity: 0 !important;
+    transform: translateY(12px) !important;
+    pointer-events: none !important;
+  }
+
+  .protectedVideoWrapper:hover .customPlayerControls,
+  .protectedVideoWrapper:focus-within .customPlayerControls,
+  .customPlayerControls:hover {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    pointer-events: auto !important;
+  }
+
+  .videoTimelineRow {
+    grid-template-columns: 38px 1fr 38px !important;
+    padding: 8px 10px !important;
+  }
+
+  .videoTimelineRow span {
+    font-size: 11px !important;
+  }
+
+  .videoButtonRow {
+    gap: 7px !important;
+  }
+
+  .videoButtonRow button {
+    padding: 8px 10px !important;
+    font-size: 12px !important;
+  }
+}
+
+/* =========================
+   NEXNENA PREMIUM VIDEO UI
+========================= */
+
+.protectedVideoWrapper {
+  position: relative !important;
+  overflow: hidden !important;
+  border-radius: 22px !important;
+  background: #000 !important;
+
+  aspect-ratio: 16 / 9 !important;
+  max-height: 420px !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.protectedVideoWrapper iframe {
+  width: 100% !important;
+  height: 100% !important;
+  border: none !important;
+}
+
+.customPlayerControls {
+  position: absolute !important;
+
+  left: 50% !important;
+  bottom: 18px !important;
+
+  transform: translateX(-50%) translateY(10px) !important;
+
+  width: calc(100% - 32px) !important;
+  max-width: 620px !important;
+
+  z-index: 20 !important;
+
+  opacity: 0 !important;
+  pointer-events: none !important;
+
+  transition: 0.22s ease !important;
+}
+
+.protectedVideoWrapper:hover .customPlayerControls,
+.protectedVideoWrapper:focus-within .customPlayerControls,
+.customPlayerControls:hover {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  transform: translateX(-50%) translateY(0) !important;
+}
+
+.videoTimelineRow {
+  display: grid !important;
+  grid-template-columns: 42px 1fr 42px !important;
+
+  align-items: center !important;
+  gap: 10px !important;
+
+  margin-bottom: 10px !important;
+
+  padding: 10px 14px !important;
+
+  border-radius: 999px !important;
+
+  background: rgba(15, 23, 42, 0.82) !important;
+
+  backdrop-filter: blur(14px) !important;
+
+  border: 1px solid rgba(255,255,255,0.08) !important;
+}
+
+.videoTimelineRow span {
+  color: white !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  text-align: center !important;
+}
+
+.videoTimelineRow input {
+  width: 100% !important;
+  accent-color: #06b6d4 !important;
+  cursor: pointer !important;
+}
+
+.videoButtonRow {
+  display: flex !important;
+
+  justify-content: center !important;
+  align-items: center !important;
+
+  flex-wrap: wrap !important;
+
+  gap: 8px !important;
+}
+
+.videoButtonRow button {
+  border: 1px solid rgba(255,255,255,0.08) !important;
+
+  border-radius: 999px !important;
+
+  padding: 8px 13px !important;
+
+  background: rgba(15, 23, 42, 0.9) !important;
+
+  color: white !important;
+
+  font-weight: 700 !important;
+
+  cursor: pointer !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  gap: 7px !important;
+
+  backdrop-filter: blur(10px) !important;
+
+  transition: 0.2s ease !important;
+}
+
+.videoButtonRow button:hover {
+  background: rgba(30, 41, 59, 0.98) !important;
+  transform: translateY(-1px) !important;
+}
+
+@media (max-width: 700px) {
+  .customPlayerControls {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+
+    width: calc(100% - 18px) !important;
+
+    bottom: 10px !important;
+  }
+
+  .videoTimelineRow {
+    grid-template-columns: 36px 1fr 36px !important;
+
+    padding: 8px 10px !important;
+  }
+
+  .videoTimelineRow span {
+    font-size: 11px !important;
+  }
+
+  .videoButtonRow {
+    gap: 6px !important;
+  }
+
+  .videoButtonRow button {
+    padding: 7px 10px !important;
+    font-size: 11px !important;
+  }
+}
+
+/* FINAL VIDEO FIX */
+
+.protectedVideoWrapper {
+  position: relative !important;
+  overflow: hidden !important;
+
+  border-radius: 22px !important;
+  background: #000 !important;
+
+  width: 100% !important;
+  aspect-ratio: 16 / 9 !important;
+
+  display: block !important;
+}
+
+.protectedVideoWrapper iframe {
+  position: absolute !important;
+
+  top: 0 !important;
+  left: 0 !important;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  border: none !important;
+
+  pointer-events: none !important;
+}
+
+.customPlayerControls {
+  position: absolute !important;
+
+  left: 50% !important;
+  bottom: 16px !important;
+
+  transform: translateX(-50%) translateY(10px) !important;
+
+  width: calc(100% - 30px) !important;
+  max-width: 620px !important;
+
+  z-index: 30 !important;
+
+  opacity: 0 !important;
+  pointer-events: none !important;
+
+  transition: 0.22s ease !important;
+}
+
+.protectedVideoWrapper:hover .customPlayerControls,
+.customPlayerControls:hover {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  transform: translateX(-50%) translateY(0) !important;
+}
+
+.videoTimelineRow {
+  display: grid !important;
+  grid-template-columns: 42px 1fr 42px !important;
+
+  align-items: center !important;
+  gap: 10px !important;
+
+  margin-bottom: 10px !important;
+
+  padding: 10px 14px !important;
+
+  border-radius: 999px !important;
+
+  background: rgba(15, 23, 42, 0.82) !important;
+
+  backdrop-filter: blur(12px) !important;
+
+  border: 1px solid rgba(255,255,255,0.08) !important;
+}
+
+.videoTimelineRow input {
+  width: 100% !important;
+  accent-color: #06b6d4 !important;
+}
+
+.videoTimelineRow span {
+  color: white !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  text-align: center !important;
+}
+
+.videoButtonRow {
+  display: flex !important;
+
+  justify-content: center !important;
+  align-items: center !important;
+
+  flex-wrap: wrap !important;
+
+  gap: 8px !important;
+}
+
+.videoButtonRow button {
+  border: 1px solid rgba(255,255,255,0.08) !important;
+
+  border-radius: 999px !important;
+
+  padding: 8px 13px !important;
+
+  background: rgba(15, 23, 42, 0.9) !important;
+
+  color: white !important;
+
+  font-weight: 700 !important;
+
+  cursor: pointer !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  gap: 7px !important;
+
+  backdrop-filter: blur(10px) !important;
+
+  transition: 0.2s ease !important;
+}
+
+.videoButtonRow button:hover {
+  background: rgba(30, 41, 59, 0.98) !important;
+  transform: translateY(-1px) !important;
+}
+
+@media (max-width: 700px) {
+  .customPlayerControls {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+
+    width: calc(100% - 16px) !important;
+
+    bottom: 10px !important;
+  }
+
+  .videoTimelineRow {
+    grid-template-columns: 36px 1fr 36px !important;
+
+    padding: 8px 10px !important;
+  }
+
+  .videoButtonRow button {
+    padding: 7px 10px !important;
+    font-size: 11px !important;
+  }
+}
+
+/* FINAL PLAYER CONTROLS LAYOUT FIX */
+
+.customPlayerControls {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 8px !important;
+
+  left: 50% !important;
+  bottom: 18px !important;
+  transform: translateX(-50%) translateY(10px) !important;
+
+  width: calc(100% - 36px) !important;
+  max-width: 520px !important;
+}
+
+.protectedVideoWrapper:hover .customPlayerControls,
+.customPlayerControls:hover {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  transform: translateX(-50%) translateY(0) !important;
+}
+
+.videoTimelineRow {
+  width: 100% !important;
+  order: 1 !important;
+  margin-bottom: 0 !important;
+}
+
+.videoButtonRow {
+  order: 2 !important;
+  width: 100% !important;
+  justify-content: center !important;
+}
+
+@media (max-width: 700px) {
+  .customPlayerControls {
+    bottom: 10px !important;
+    width: calc(100% - 18px) !important;
+    max-width: 420px !important;
+  }
+
+  .videoTimelineRow {
+    padding: 7px 10px !important;
+  }
+
+  .videoButtonRow button {
+    padding: 7px 10px !important;
+    font-size: 11px !important;
+  }
+}
+
+/* AUTO HIDE CONTROLS INCLUDING FULLSCREEN */
+
+.customPlayerControls {
+  opacity: 0 !important;
+  pointer-events: none !important;
+
+  transition:
+    opacity 0.22s ease,
+    transform 0.22s ease !important;
+}
+
+/* SHOW ONLY ON HOVER */
+
+.protectedVideoWrapper:hover .customPlayerControls,
+.customPlayerControls:hover,
+.protectedVideoWrapper:focus-within .customPlayerControls,
+.protectedVideoWrapper:fullscreen:hover .customPlayerControls {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+/* FULLSCREEN SUPPORT */
+
+.protectedVideoWrapper:fullscreen {
+  width: 100vw !important;
+  height: 100vh !important;
+  background: #000 !important;
+  border-radius: 0 !important;
+}
+
+.protectedVideoWrapper:fullscreen iframe {
+  width: 100vw !important;
+  height: 100vh !important;
+}
+
+/* MOBILE TOUCH SUPPORT */
+
+@media (max-width: 700px) {
+  .protectedVideoWrapper:active .customPlayerControls,
+  .protectedVideoWrapper:hover .customPlayerControls {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+}
+
+/* FORCE HIDE FULLSCREEN CONTROLS UNTIL HOVER */
+
+.protectedVideoWrapper:fullscreen .customPlayerControls {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transform: translateX(-50%) translateY(14px) !important;
+}
+
+.protectedVideoWrapper:fullscreen:hover .customPlayerControls,
+.protectedVideoWrapper:fullscreen .customPlayerControls:hover {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  transform: translateX(-50%) translateY(0) !important;
+}

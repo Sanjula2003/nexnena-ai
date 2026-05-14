@@ -1,51 +1,142 @@
-import { Bell, Brain, CreditCard, User } from "lucide-react";
+import { useEffect, useState } from "react";
+import { doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
+import { Save, User } from "lucide-react";
+import { auth, db } from "../firebase";
 
 function SettingsPage() {
+  const [loading, setLoading] = useState(false);
+  const [saving, setSaving] = useState(false);
+
+  const [teacherName, setTeacherName] = useState("");
+  const [instituteName, setInstituteName] = useState("");
+  const [subjectStream, setSubjectStream] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+
+  useEffect(() => {
+    async function fetchProfile() {
+      try {
+        setLoading(true);
+
+        const currentUser = auth.currentUser;
+        if (!currentUser) return;
+
+        const userRef = doc(db, "users", currentUser.uid);
+        const userSnap = await getDoc(userRef);
+
+        if (userSnap.exists()) {
+          const data = userSnap.data();
+
+          setTeacherName(data.name || "");
+          setInstituteName(data.instituteName || "");
+          setSubjectStream(data.subjectStream || "");
+          setPhoneNumber(data.phoneNumber || "");
+        }
+      } catch (error) {
+        console.error("Failed to fetch profile:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchProfile();
+  }, []);
+
+  async function handleSave(e) {
+    e.preventDefault();
+
+    try {
+      setSaving(true);
+
+      const currentUser = auth.currentUser;
+
+      if (!currentUser) {
+        alert("User not found.");
+        return;
+      }
+
+      const userRef = doc(db, "users", currentUser.uid);
+
+      await setDoc(
+        userRef,
+        {
+          name: teacherName,
+          instituteName,
+          subjectStream,
+          phoneNumber,
+          email: currentUser.email,
+          role: "teacher",
+          plan: "basic",
+          updatedAt: serverTimestamp(),
+        },
+        { merge: true }
+      );
+
+      alert("Profile settings saved successfully.");
+    } catch (error) {
+      console.error("Failed to save settings:", error);
+      alert(error.message || "Failed to save settings.");
+    } finally {
+      setSaving(false);
+    }
+  }
+
   return (
     <section className="dashPage">
       <div className="dashHeader">
         <div>
-          <span>PLATFORM SETTINGS</span>
-          <h1>Teacher OS Configuration</h1>
-          <p>Manage profile, AI preferences, notifications, and subscription settings.</p>
+          <span>BASIC PACKAGE</span>
+          <h1>Teacher Profile Settings</h1>
+          <p>
+            Manage your teacher profile details used across NexNena Learning
+            Portal.
+          </p>
         </div>
-        <button>Workspace Active</button>
       </div>
 
-      <div className="settingsGrid">
-        <div className="settingsCard">
+      <div className="dashPanel">
+        <div className="sectionTitle">
           <User size={22} />
-          <h3>Teacher Profile</h3>
-          <p>Manage teacher name, institution, subject area, and workspace identity.</p>
-          <div className="settingField">Sanjula Bandara</div>
-          <div className="settingField">Advanced Level Science Stream</div>
+          <h3>Profile Information</h3>
         </div>
 
-        <div className="settingsCard">
-          <Brain size={22} />
-          <h3>AI Preferences</h3>
-          <p>Control AI tone, difficulty level, content style, and generation behavior.</p>
-          <div className="toggleRow"><span>Exam-focused outputs</span><button>ON</button></div>
-          <div className="toggleRow"><span>Sinhala support</span><button>ON</button></div>
-        </div>
+        {loading ? (
+          <div className="emptyTopicState">Loading profile settings...</div>
+        ) : (
+          <form className="studentAccessForm" onSubmit={handleSave}>
+            <input
+              type="text"
+              placeholder="Teacher Name"
+              value={teacherName}
+              onChange={(e) => setTeacherName(e.target.value)}
+            />
 
-        <div className="settingsCard">
-          <Bell size={22} />
-          <h3>Notifications</h3>
-          <p>Configure alerts for student risks, payments, attendance, and AI outputs.</p>
-          <div className="toggleRow"><span>Revision risk alerts</span><button>ON</button></div>
-          <div className="toggleRow"><span>Payment reminders</span><button>ON</button></div>
-        </div>
+            <input
+              type="text"
+              placeholder="Institute / Class Name"
+              value={instituteName}
+              onChange={(e) => setInstituteName(e.target.value)}
+            />
 
-        <div className="settingsCard">
-          <CreditCard size={22} />
-          <h3>Subscription</h3>
-          <p>Current demo workspace plan and future billing configuration.</p>
-          <div className="planBox">
-            <h4>Professional Demo</h4>
-            <span>Active MVP Workspace</span>
-          </div>
-        </div>
+            <input
+              type="text"
+              placeholder="Subject Stream"
+              value={subjectStream}
+              onChange={(e) => setSubjectStream(e.target.value)}
+            />
+
+            <input
+              type="text"
+              placeholder="Phone Number"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+            />
+
+            <button type="submit" disabled={saving}>
+              <Save size={18} />
+              {saving ? "Saving..." : "Save Settings"}
+            </button>
+          </form>
+        )}
       </div>
     </section>
   );

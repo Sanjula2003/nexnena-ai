@@ -156,57 +156,58 @@ Requirements:
   }
 
   async function handleGenerate() {
-    if (!prompt.trim()) {
-      alert("Please enter a topic first.");
-      return;
-    }
-
-    setGenerating(true);
-    setAiOutput("");
-
-    try {
-      const structuredPrompt = buildStructuredPrompt();
-
-      const output = await generateEducationalContent(structuredPrompt);
-
-      setAiOutput(output);
-
-      if (auth.currentUser) {
-        await addDoc(collection(db, "ai_generations"), {
-          teacherId: auth.currentUser.uid,
-          type: selectedType,
-          prompt,
-          output,
-          createdAt: serverTimestamp(),
-        });
-      }
-    } catch (error) {
-      console.error("AI generation error:", error);
-
-      setAiOutput(`
-# AI Demo Output
-
-## ${selectedType}
-
-### Topic
-${prompt}
-
-### Educational Summary
-This is a premium AI-generated educational response for NexNena AI.
-
-### Key Points
-- Structured educational explanations
-- Exam-focused content
-- Student-friendly formatting
-- AI-enhanced learning workflow
-
-### Teacher Recommendation
-Use this content as revision material and classroom support documentation.
-`);
-    } finally {
-      setGenerating(false);
-    }
+  if (!prompt.trim()) {
+    alert("Please enter a topic first.");
+    return;
   }
+
+  setGenerating(true);
+  setAiOutput("");
+
+  try {
+    const structuredPrompt = buildStructuredPrompt();
+
+    const output = await generateEducationalContent(
+      structuredPrompt
+    );
+
+    setAiOutput(output);
+
+    if (auth.currentUser) {
+      await addDoc(collection(db, "ai_generations"), {
+        teacherId: auth.currentUser.uid,
+        type: selectedType,
+        prompt,
+        output,
+        createdAt: serverTimestamp(),
+      });
+    }
+  } catch (error) {
+    console.error("AI generation error:", error);
+
+    setAiOutput(`
+# AI Generation Failed
+
+## Error Details
+${error.message || "Unknown AI error occurred."}
+
+## Possible Reasons
+- Puter AI service unavailable
+- Invalid AI model
+- Internet connection issue
+- API limit reached
+- Puter.js not loaded properly
+
+## Recommended Fix
+- Refresh the page
+- Check internet connection
+- Verify Puter.js script
+- Try again in a few seconds
+`);
+  } finally {
+    setGenerating(false);
+  }
+}
 
 function handleExportPDF() {
   if (!aiOutput) {

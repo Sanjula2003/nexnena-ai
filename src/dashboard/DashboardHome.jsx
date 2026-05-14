@@ -1,137 +1,177 @@
+import { useEffect, useMemo, useState } from "react";
+
 import {
-  BarChart3,
-  Brain,
-  CalendarDays,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
+
+import {
+  BookOpen,
+  CheckCircle,
   CreditCard,
-  Users,
+  UserPlus,
+  XCircle,
 } from "lucide-react";
 
-import ActivityFeed from "../components/ActivityFeed";
+import { auth, db } from "../firebase";
 
 function DashboardHome() {
+  const [teacherName, setTeacherName] = useState("Teacher");
+  const [topics, setTopics] = useState([]);
+  const [records, setRecords] = useState([]);
+
+  async function fetchDashboardData() {
+    try {
+      const currentUser = auth.currentUser;
+
+      if (!currentUser) return;
+
+      const teacherId = currentUser.uid;
+
+      const userRef = doc(db, "users", teacherId);
+      const userSnap = await getDoc(userRef);
+
+      if (userSnap.exists()) {
+        setTeacherName(userSnap.data().name || "Teacher");
+      }
+
+      const topicsQuery = query(
+        collection(db, "topics"),
+        where("teacherId", "==", teacherId)
+      );
+
+      const recordsQuery = query(
+        collection(db, "subscriptions"),
+        where("teacherId", "==", teacherId)
+      );
+
+      const topicsSnap = await getDocs(topicsQuery);
+      const recordsSnap = await getDocs(recordsQuery);
+
+      setTopics(
+        topicsSnap.docs.map((item) => ({
+          id: item.id,
+          ...item.data(),
+        }))
+      );
+
+      setRecords(
+        recordsSnap.docs.map((item) => ({
+          id: item.id,
+          ...item.data(),
+        }))
+      );
+    } catch (error) {
+      console.error("Failed to load dashboard data:", error);
+    }
+  }
+
+  useEffect(() => {
+    fetchDashboardData();
+  }, []);
+
+  const stats = useMemo(() => {
+    const paidRecords = records.filter(
+      (item) => item.paymentStatus === "paid"
+    );
+
+    const unpaidRecords = records.filter(
+      (item) => item.paymentStatus === "unpaid"
+    );
+
+    const revenue = paidRecords.reduce((sum, item) => {
+      return sum + Number(item.amount || 0);
+    }, 0);
+
+    return {
+      topicCount: topics.length,
+      recordCount: records.length,
+      paidCount: paidRecords.length,
+      unpaidCount: unpaidRecords.length,
+      revenue,
+    };
+  }, [topics, records]);
+
+  const recentRecords = records.slice(0, 5);
+
   return (
     <section className="dashPage">
       <div className="dashHeader">
         <div>
-          <span>NEXNENA TEACHER OS</span>
+          <span>BASIC PACKAGE</span>
 
-          <h1>Good evening, Sanjula 👋</h1>
+          <h1>Welcome back, {teacherName || "Teacher"} 👋</h1>
 
           <p>
-            Your AI command center for today’s education operations.
+            Manage students, payments, subject access, and lesson content from
+            your tuition dashboard.
           </p>
         </div>
-
-        <button>May 2026</button>
       </div>
 
       <div className="dashKpiGrid">
         <div className="dashKpiCard">
-          <Users />
-          <p>Total Students</p>
-          <h2>248</h2>
-          <span>+12 this month</span>
+          <BookOpen />
+          <p>Total Topics</p>
+          <h2>{stats.topicCount}</h2>
+          <span>Available subjects</span>
+        </div>
+
+        <div className="dashKpiCard">
+          <UserPlus />
+          <p>Student Records</p>
+          <h2>{stats.recordCount}</h2>
+          <span>Registered payment records</span>
+        </div>
+
+        <div className="dashKpiCard">
+          <CheckCircle />
+          <p>Paid Students</p>
+          <h2>{stats.paidCount}</h2>
+          <span>Portal access enabled</span>
         </div>
 
         <div className="dashKpiCard">
           <CreditCard />
-          <p>Monthly Revenue</p>
-          <h2>LKR 128,450</h2>
-          <span>+18.6%</span>
-        </div>
-
-        <div className="dashKpiCard">
-          <CalendarDays />
-          <p>Attendance Rate</p>
-          <h2>86.7%</h2>
-          <span>+6.4%</span>
-        </div>
-
-        <div className="dashKpiCard">
-          <BarChart3 />
-          <p>Engagement Score</p>
-          <h2>78/100</h2>
-          <span>+9 pts</span>
+          <p>Total Paid Amount</p>
+          <h2>Rs. {stats.revenue.toLocaleString()}</h2>
+          <span>Paid records only</span>
         </div>
       </div>
 
       <div className="dashContentGrid">
         <div className="dashPanel large">
-          <h3>AI Insights</h3>
+          <h3>Recent Student Records</h3>
 
-          <div className="dashInsight">
-            <Brain />
-
-            <div>
-              <h4>12 students are at revision risk</h4>
-
-              <p>
-                They are falling behind in two or more learning areas.
-              </p>
+          {recentRecords.length === 0 ? (
+            <div className="emptyTopicState">
+              No student payment records yet.
             </div>
-          </div>
+          ) : (
+            recentRecords.map((item) => (
+              <div className="dashInsight" key={item.id}>
+                {item.paymentStatus === "paid" ? (
+                  <CheckCircle />
+                ) : (
+                  <XCircle />
+                )}
 
-          <div className="dashInsight">
-            <BarChart3 />
+                <div>
+                  <h4>{item.studentName || "Unnamed Student"}</h4>
 
-            <div>
-              <h4>Biology engagement improved</h4>
-
-              <p>
-                Engagement increased by 15% compared with last week.
-              </p>
-            </div>
-          </div>
-
-          <div className="dashInsight">
-            <CreditCard />
-
-            <div>
-              <h4>5 payments are pending</h4>
-
-              <p>
-                Total pending amount: LKR 18,750.
-              </p>
-            </div>
-          </div>
-
-          <ActivityFeed />
-        </div>
-
-        <div className="dashPanel">
-          <h3>Upcoming Classes</h3>
-
-          <div className="dashClassItem">
-            <strong>Physics Theory</strong>
-
-            <span>Today · 6.00 PM</span>
-          </div>
-
-          <div className="dashClassItem">
-            <strong>Chemistry Revision</strong>
-
-            <span>Tomorrow · 8.00 AM</span>
-          </div>
-
-          <div className="dashClassItem">
-            <strong>Combined Maths</strong>
-
-            <span>Tomorrow · 6.00 PM</span>
-          </div>
-        </div>
-
-        <div className="dashPanel">
-          <h3>Quick AI Actions</h3>
-
-          <div className="dashActionGrid">
-            <button>Generate Tute</button>
-
-            <button>Create MCQs</button>
-
-            <button>Build Planner</button>
-
-            <button>Write Caption</button>
-          </div>
+                  <p>
+                    {item.email} · {item.topic} · Rs.{" "}
+                    {Number(item.amount || 0).toLocaleString()} ·{" "}
+                    {item.paymentStatus === "paid" ? "Paid" : "Unpaid"}
+                  </p>
+                </div>
+              </div>
+            ))
+          )}
         </div>
       </div>
     </section>
