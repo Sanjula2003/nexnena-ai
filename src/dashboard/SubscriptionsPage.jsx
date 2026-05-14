@@ -167,23 +167,25 @@ function SubscriptionsPage() {
         const temporaryPassword =
           "Student@" + Math.floor(1000 + Math.random() * 9000);
 
-        const response = await fetch("https://nexnena-ai-1.onrender.com//create-student", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            teacherId,
-            studentName,
-            email: cleanEmail,
-            password: temporaryPassword,
-            topic,
-            amount,
-            paymentStatus,
-            paymentMethod,
-          }),
-        });
-
+        const response = await fetch(
+            "https://YOUR-RENDER-BACKEND.onrender.com/create-student",
+            {
+                method: "POST",
+                headers: {
+                "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                teacherId,
+                studentName,
+                email: cleanEmail,
+                password: temporaryPassword,
+                topic,
+                amount,
+                paymentStatus,
+                paymentMethod,
+                }),
+            }
+            );
         const data = await response.json();
 
         if (!response.ok) {
