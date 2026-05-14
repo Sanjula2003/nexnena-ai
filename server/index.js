@@ -1,10 +1,10 @@
+
 import express from "express";
 import cors from "cors";
 import admin from "firebase-admin";
-import fs from "fs";
 
 const serviceAccount = JSON.parse(
-  fs.readFileSync("./serviceAccountKey.json", "utf8")
+  process.env.FIREBASE_SERVICE_ACCOUNT
 );
 
 const app = express();
@@ -111,8 +111,11 @@ app.post("/create-student", async (req, res) => {
   }
 });
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`NexNena server running on port ${PORT}`);
 });
+
+
+
